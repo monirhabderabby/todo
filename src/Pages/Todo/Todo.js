@@ -14,7 +14,19 @@ const Todo = () => {
         e.preventDefault();
         const todo = e.target.todo.value;
         const result = {todo, date}
-        console.log(result);
+        fetch("http://localhost:5000/todo", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(result)
+        })
+        .then(res=> res.json())
+        .then(data => {
+            if(data.acknowledged){
+                e.target.todo.value = ""
+            }
+        })
 
     }
     return (
