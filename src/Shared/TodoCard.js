@@ -6,7 +6,39 @@ import {
     faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
-const TodoCard = ({ todo }) => {
+const TodoCard = ({ todo, refetch, refetch1 }) => {
+
+    const handleCompleted = () => {
+        fetch(`http://localhost:5000/complete/${todo?._id}`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            if(data.modifiedCount > 0){
+                refetch();
+            }
+        })
+    }
+
+    const handleDelete =  e => {
+        fetch(`http://localhost:5000/delete/${todo?._id}`, {
+            method: "DELETE",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            if(data.acknowledged){
+                refetch()
+                refetch1()
+            }
+        })
+    }
+
     return (
         <form className="w-[100%] md:w-[100%] mx-auto mt-4">
             <div class="relative">
@@ -19,9 +51,9 @@ const TodoCard = ({ todo }) => {
                     readOnly
                 />
                 <div className="absolute right-2.5 bottom-2.5 ">
-                    <FontAwesomeIcon icon={faCheckCircle} className="mx-2" />
-                    <FontAwesomeIcon icon={faPenSquare} className="mx-2" />
-                    <FontAwesomeIcon icon={faTrash} className="mx-2" />
+                    <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-lg hover:text-green-600" onClick={handleCompleted} />
+                    <FontAwesomeIcon icon={faPenSquare} className="mx-2 text-lg hover:text-green-600" />
+                    <FontAwesomeIcon icon={faTrash} className="mx-2 text-lg hover:text-red-600" onClick={handleDelete}/>
                 </div>
             </div>
         </form>
