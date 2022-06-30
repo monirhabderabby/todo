@@ -4,15 +4,28 @@ import note from '../../Assets/note.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDay, faL } from '@fortawesome/free-solid-svg-icons'
 import DayPickerModal from "../../Shared/DayPickerModal";
+import { useQuery } from "react-query";
+import TodoCard from "../../Shared/TodoCard";
+import { Accordion } from "flowbite-react";
+import { format } from "date-fns";
 
 
 const Todo = () => {
     const [isPickDate, setIsPickDate] = useState(false);
     const [date, setDate] = useState("");
+    const [today, setToday] = useState(new Date())
 
-    const handleNewToDo = e => {
+    const {data, isLoading, refetch} =  useQuery('todos', () => fetch(`http://localhost:5000/todos/${format(today, "PP")}`).then(res=> res.json()))
+    if(isLoading){
+        return <p>loading...</p>
+    }
+    if(data){
+        console.log(data);
+    }
+
+    const handleNewToDo = async (e) => {
         e.preventDefault();
-        const todo = e.target.todo.value;
+        let todo = e.target.todo.value;
         const result = {todo, date}
         fetch("http://localhost:5000/todo", {
             method: "POST",
@@ -24,7 +37,9 @@ const Todo = () => {
         .then(res=> res.json())
         .then(data => {
             if(data.acknowledged){
+                refetch();
                 e.target.todo.value = ""
+                
             }
         })
 
@@ -57,6 +72,23 @@ const Todo = () => {
                         </div>
                     </div>
                 </form>
+                
+                <section className="w-[100%] md:w-[50%] mx-auto mt-4">
+                <Accordion alwaysOpen={true}>
+                <Accordion.Panel>
+                <Accordion.Title>
+                    Today
+                </Accordion.Title>
+                <Accordion.Content>
+                    {
+                        data?.map(t=> <TodoCard todo={t} />)
+                    }
+                </Accordion.Content>
+                </Accordion.Panel>
+
+                </Accordion>
+                </section>
+                
             </div>
             {
                 isPickDate && <DayPickerModal modal={isPickDate} setIsPickDate={setIsPickDate} setDate={setDate} />
