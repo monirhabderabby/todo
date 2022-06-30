@@ -3,10 +3,13 @@ import './App.css';
 import Calender from './Pages/Calender/Calender';
 import CompleteTasks from './Pages/CompleteTasks/CompleteTasks';
 import Todo from './Pages/Todo/Todo';
+import TNavbar from './Shared/TNavbar';
+import 'react-day-picker/dist/style.css';
 
 function App() {
   return (
     <div className="App">
+      <TNavbar />
       <Routes>
         <Route path='/' element={<Todo />} />
         <Route path='/completetasks' element={<CompleteTasks />} />

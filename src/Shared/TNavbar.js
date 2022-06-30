@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const TNavbar = () => {
     return (
-        <div className="px-3 md:px-6 lg:px-12">
+        <div className="px-3 md:px-6 l:px-12">
             <Navbar fluid={true} rounded={true}>
             <Navbar.Brand href="https://flowbite.com/">
                 <img
@@ -12,7 +12,7 @@ const TNavbar = () => {
                     className="mr-3 h-6 sm:h-9"
                     alt="Flowbite Logo"
                 />
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                <span className="self-center  text-xl font-semibold">
                     TODOIST
                 </span>
             </Navbar.Brand>
