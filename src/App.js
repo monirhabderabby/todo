@@ -5,6 +5,7 @@ import CompleteTasks from './Pages/CompleteTasks/CompleteTasks';
 import Todo from './Pages/Todo/Todo';
 import TNavbar from './Shared/TNavbar';
 import 'react-day-picker/dist/style.css';
+import TFooter from './Shared/TFooter';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/completetasks' element={<CompleteTasks />} />
         <Route path='/calender' element={<Calender />} />
       </Routes>
+      <TFooter />
     </div>
   );
 }
