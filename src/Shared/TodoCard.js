@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faTrash,
@@ -7,6 +7,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const TodoCard = ({ todo, refetch, refetch1}) => {
+    const [isEdit, setIsEdit] = useState(false);
+    const [editText, setEditText] = useState('')
 
     const handleCompleted = () => {
         fetch(`http://localhost:5000/complete/${todo?._id}`, {
@@ -24,7 +26,7 @@ const TodoCard = ({ todo, refetch, refetch1}) => {
         })
     }
 
-    const handleDelete =  e => {
+    const handleDelete = async e => {
         fetch(`http://localhost:5000/delete/${todo?._id}`, {
             method: "DELETE",
             headers: {
@@ -34,6 +36,28 @@ const TodoCard = ({ todo, refetch, refetch1}) => {
         .then(res=> res.json())
         .then(data=> {
             if(data.acknowledged){
+                refetch()
+                refetch1();
+            }
+        })
+    }
+
+    const handleText = e => {
+        setEditText(e.target.value)
+    }
+
+    const handleEdit = e => {
+        fetch(`http://localhost:5000/todoUpdate/${todo?._id}`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({todo: editText})
+        })
+        .then(res=> res.json())
+        .then(data=> {
+            setIsEdit(false)
+            if(data.modifiedCount > 0){
                 refetch();
                 refetch1();
             }
@@ -48,12 +72,21 @@ const TodoCard = ({ todo, refetch, refetch1}) => {
                     type="search"
                     name="todo"
                     class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    value={todo?.todo}
-                    readOnly
+                    placeholder={todo?.todo}
+                    disabled={!isEdit}
+                    onChange={handleText}
+                    
                 />
                 <div className="absolute right-2.5 bottom-2.5 ">
-                    <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-lg hover:text-green-600" onClick={handleCompleted} />
-                    <FontAwesomeIcon icon={faPenSquare} className="mx-2 text-lg hover:text-green-600" />
+                    {
+                        !isEdit && <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-lg hover:text-green-600" onClick={handleCompleted} />
+                    }
+                    {
+                        isEdit ? 
+                        <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-lg hover:text-green-600"onClick={handleEdit}/>
+                        :
+                        <FontAwesomeIcon icon={faPenSquare} className="mx-2 text-lg hover:text-green-600" onClick={()=>setIsEdit(!isEdit)} />
+                    }
                     <FontAwesomeIcon icon={faTrash} className="mx-2 text-lg hover:text-red-600" onClick={handleDelete}/>
                 </div>
             </div>
