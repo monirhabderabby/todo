@@ -1,14 +1,15 @@
 import { Footer } from "flowbite-react";
 import React from "react";
+import logo from '../Assets/logo.png'
 
 const TFooter = () => {
     return (
         <div>
-            <div className="w-full text-center bg-[#f0f3ff] px-12">
+            <div className="w-full text-center bg-[#fff] lg:px-12 py-6">
                 <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
                     <Footer.Brand
                         href="https://flowbite.com"
-                        src="https://flowbite.com/docs/images/logo.svg"
+                        src={logo}
                         alt="Flowbite Logo"
                         name="TODOIST"
                     />

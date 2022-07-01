@@ -11,7 +11,7 @@ const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
     const [editText, setEditText] = useState('')
 
     const handleCompleted = () => {
-        fetch(`http://localhost:5000/complete/${todo?._id}`, {
+        fetch(`https://tranquil-fjord-47629.herokuapp.com/complete/${todo?._id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -27,7 +27,7 @@ const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
     }
 
     const handleDelete = async e => {
-        fetch(`http://localhost:5000/delete/${todo?._id}`, {
+        fetch(`https://tranquil-fjord-47629.herokuapp.com/delete/${todo?._id}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json'
@@ -47,7 +47,7 @@ const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
     }
 
     const handleEdit = e => {
-        fetch(`http://localhost:5000/todoUpdate/${todo?._id}`, {
+        fetch(`https://tranquil-fjord-47629.herokuapp.com/todoUpdate/${todo?._id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -66,12 +66,12 @@ const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
 
     return (
         <form className="w-[100%] md:w-[100%] mx-auto mt-4">
-            <div class="relative">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></div>
+            <div className="relative">
+                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></div>
                 <input
                     type="search"
                     name="todo"
-                    class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder={todo?.todo}
                     disabled={!isEdit}
                     onChange={handleText}

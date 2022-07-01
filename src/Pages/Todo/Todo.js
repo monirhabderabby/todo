@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Todo.css";
 import note from "../../Assets/note.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDay, faL } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
 import DayPickerModal from "../../Shared/DayPickerModal";
 import { useQuery } from "react-query";
 import TodoCard from "../../Shared/TodoCard";
@@ -15,12 +15,12 @@ const Todo = () => {
     const [today, setToday] = useState(new Date());
 
     const { data:allTodos, isLoading, refetch } = useQuery("todos", () =>
-        fetch(`http://localhost:5000/todos/${format(today, "PP")}`).then(
+        fetch(`https://tranquil-fjord-47629.herokuapp.com/todos/${format(today, "PP")}`).then(
             (res) => res.json()
         )
     );
 
-    const { data:completedTodos, isLoading: isLoading1, refetch:refetch1} = useQuery("completed", ()=> fetch("http://localhost:5000/completed").then(res=> res.json()))
+    const { data:completedTodos, isLoading: isLoading1, refetch:refetch1} = useQuery("completed", ()=> fetch("https://tranquil-fjord-47629.herokuapp.com/completed").then(res=> res.json()))
     if (isLoading || isLoading1) {
         return <p>loading...</p>;
     }
@@ -31,7 +31,7 @@ const Todo = () => {
         e.preventDefault();
         let todo = e.target.todo.value;
         const result = { todo, date: date || format(today, "PP"), isCompleted: false };
-        fetch("http://localhost:5000/todo", {
+        fetch("https://tranquil-fjord-47629.herokuapp.com/todo", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -55,14 +55,14 @@ const Todo = () => {
                     className="w-[100%] md:w-[50%] mx-auto mt-4"
                     onSubmit={handleNewToDo}
                 >
-                    <div class="relative">
-                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <div className="relative">
+                        <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                             <img src={note} alt="" className="w-6" />
                         </div>
                         <input
                             type="search"
                             name="todo"
-                            class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="New Task"
                             required
                         />
@@ -74,7 +74,7 @@ const Todo = () => {
                             />
                             <button
                                 type="submit"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             >
                                 SAVE
                             </button>
@@ -88,7 +88,7 @@ const Todo = () => {
                             <Accordion.Title>Today ({allTodos?.length})</Accordion.Title>
                             <Accordion.Content>
                                 {allTodos?.map((t) => (
-                                    <TodoCard todo={t} refetch={refetch} refetch1={refetch1}/>
+                                    <TodoCard todo={t} refetch={refetch} refetch1={refetch1} key={t._id} />
                                 ))}
                             </Accordion.Content>
                         </Accordion.Panel>
@@ -100,7 +100,7 @@ const Todo = () => {
                             <Accordion.Title>Completed {completedTodos?.length}</Accordion.Title>
                             <Accordion.Content>
                                 {completedTodos?.map((t) => (
-                                    <TodoCard  todo={t} isCompleted={true} />
+                                    <TodoCard  todo={t} isCompleted={true} key={t._id} />
                                 ))}
                             </Accordion.Content>
                         </Accordion.Panel>

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import TodoCard from '../../Shared/TodoCard';
 
 const CompleteTasks = () => {
-    const { data:completedTodos, isLoading: isLoading1, refetch:refetch1} = useQuery("completed", ()=> fetch("http://localhost:5000/completed").then(res=> res.json()))
+    const { data:completedTodos, isLoading: isLoading1, refetch:refetch1} = useQuery("completed", ()=> fetch("https://tranquil-fjord-47629.herokuapp.com/completed").then(res=> res.json()))
     if (isLoading1) {
         return <p>loading...</p>;
     }
