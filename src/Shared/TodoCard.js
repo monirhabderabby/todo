@@ -20,8 +20,7 @@ const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
         .then(res=> res.json())
         .then(data=> {
             if(data.modifiedCount > 0){
-                refetch();
-                refetch1();
+                refetch() && refetch1();
             }
         })
     }
@@ -36,8 +35,7 @@ const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
         .then(res=> res.json())
         .then(data=> {
             if(data.acknowledged){
-                refetch()
-                refetch1();
+                refetch() && refetch1();
             }
         })
     }

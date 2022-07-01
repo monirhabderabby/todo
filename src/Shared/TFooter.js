@@ -4,7 +4,7 @@ import logo from '../Assets/logo.png'
 
 const TFooter = () => {
     return (
-        <div>
+        <div className="relative">
             <div className="w-full text-center bg-[#fff] lg:px-12 py-6">
                 <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
                     <Footer.Brand
