@@ -88,7 +88,7 @@ const Todo = () => {
                             <Accordion.Title>Today ({allTodos?.length})</Accordion.Title>
                             <Accordion.Content>
                                 {allTodos?.map((t) => (
-                                    <TodoCard todo={t} refetch={refetch}/>
+                                    <TodoCard todo={t} refetch={refetch} refetch1={refetch1}/>
                                 ))}
                             </Accordion.Content>
                         </Accordion.Panel>
@@ -100,7 +100,7 @@ const Todo = () => {
                             <Accordion.Title>Completed {completedTodos?.length}</Accordion.Title>
                             <Accordion.Content>
                                 {completedTodos?.map((t) => (
-                                    <TodoCard  todo={t} refetch1={refetch1} />
+                                    <TodoCard  todo={t} />
                                 ))}
                             </Accordion.Content>
                         </Accordion.Panel>

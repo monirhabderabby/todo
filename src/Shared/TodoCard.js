@@ -6,7 +6,7 @@ import {
     faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
-const TodoCard = ({ todo, refetch, refetch1 }) => {
+const TodoCard = ({ todo, refetch, refetch1}) => {
 
     const handleCompleted = () => {
         fetch(`http://localhost:5000/complete/${todo?._id}`, {
@@ -19,6 +19,7 @@ const TodoCard = ({ todo, refetch, refetch1 }) => {
         .then(data=> {
             if(data.modifiedCount > 0){
                 refetch();
+                refetch1();
             }
         })
     }
@@ -33,8 +34,8 @@ const TodoCard = ({ todo, refetch, refetch1 }) => {
         .then(res=> res.json())
         .then(data=> {
             if(data.acknowledged){
-                refetch()
-                refetch1()
+                refetch();
+                refetch1();
             }
         })
     }
