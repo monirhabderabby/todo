@@ -6,7 +6,7 @@ import {
     faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
-const TodoCard = ({ todo, refetch, refetch1}) => {
+const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [editText, setEditText] = useState('')
 
@@ -79,15 +79,15 @@ const TodoCard = ({ todo, refetch, refetch1}) => {
                 />
                 <div className="absolute right-2.5 bottom-2.5 ">
                     {
-                        !isEdit && <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-lg hover:text-green-600" onClick={handleCompleted} />
+                        !isCompleted && !isEdit && <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-lg hover:text-green-600" onClick={handleCompleted} /> 
                     }
                     {
                         isEdit ? 
-                        <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-lg hover:text-green-600"onClick={handleEdit}/>
+                        <FontAwesomeIcon icon={faCheckCircle} className="mx-2 text-xl hover:text-green-600"onClick={handleEdit}/>
                         :
-                        <FontAwesomeIcon icon={faPenSquare} className="mx-2 text-lg hover:text-green-600" onClick={()=>setIsEdit(!isEdit)} />
+                        <FontAwesomeIcon icon={faPenSquare} className="mx-2 text-xl hover:text-green-600" onClick={()=>setIsEdit(!isEdit)} />
                     }
-                    <FontAwesomeIcon icon={faTrash} className="mx-2 text-lg hover:text-red-600" onClick={handleDelete}/>
+                    <FontAwesomeIcon icon={faTrash} className="mx-2 text-xl hover:text-red-600" onClick={handleDelete}/>
                 </div>
             </div>
         </form>
