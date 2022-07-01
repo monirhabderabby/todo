@@ -5,7 +5,7 @@ import logo from '../Assets/logo.png'
 
 const TNavbar = () => {
     return (
-        <div className="px-3 md:px-6 l:px-12">
+        <div className="md:px-6 lg:px-12">
             <Navbar fluid={true} rounded={true}>
                 <Navbar.Brand href="/">
                     <img
@@ -22,7 +22,7 @@ const TNavbar = () => {
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
-                            isActive ? "text-blue-500" : undefined
+                            isActive ? "text-blue-500 bg-[#f0f3ff] p-2 rounded-md" : "bg-[#f0f3ff] p-2 rounded-md hover:text-blue-500 transition-colors"
                         }
                     >
                         Tasks
@@ -30,7 +30,7 @@ const TNavbar = () => {
                     <NavLink
                         to="/completetasks"
                         className={({ isActive }) =>
-                            isActive ? "text-blue-500" : undefined
+                            isActive ? "text-blue-500 bg-[#f0f3ff] p-2 rounded-md" : "bg-[#f0f3ff] p-2 rounded-md hover:text-blue-500 transition-colors"
                         }
                     >
                         Completed Tasks
@@ -38,7 +38,7 @@ const TNavbar = () => {
                     <NavLink
                         to="/calender"
                         className={({ isActive }) =>
-                            isActive ? "text-blue-500" : undefined
+                            isActive ? "text-blue-500 bg-[#f0f3ff] p-2 rounded-md" : "bg-[#f0f3ff] p-2 rounded-md hover:text-blue-500 transition-colors"
                         }
                     >
                         Calendar
