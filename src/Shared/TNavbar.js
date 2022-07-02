@@ -18,7 +18,7 @@ const TNavbar = () => {
                     </span>
                 </Navbar.Brand>
                 <Navbar.Toggle />
-                <Navbar.Collapse>
+                <Navbar.Collapse className="nav">
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
