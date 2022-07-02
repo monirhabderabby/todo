@@ -5,8 +5,9 @@ import {
     faPenSquare,
     faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import Loader from "./Loader";
 
-const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
+const TodoCard = ({ todo, refetch, refetch1, isCompleted, isLoading}) => {
     const [isEdit, setIsEdit] = useState(false);
     const [editText, setEditText] = useState('')
 
@@ -65,7 +66,7 @@ const TodoCard = ({ todo, refetch, refetch1, isCompleted}) => {
     return (
         <form className="w-[100%] md:w-[100%] mx-auto mt-4">
             <div className="relative">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></div>
+            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></div>
                 <input
                     type="search"
                     name="todo"

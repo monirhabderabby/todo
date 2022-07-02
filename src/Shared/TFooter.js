@@ -1,5 +1,6 @@
 import { Footer } from "flowbite-react";
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from '../Assets/logo.png'
 
 const TFooter = () => {
@@ -14,10 +15,10 @@ const TFooter = () => {
                         name="TODOIST"
                     />
                     <Footer.LinkGroup>
-                        <Footer.Link href="#">About</Footer.Link>
-                        <Footer.Link href="#">Privacy Policy</Footer.Link>
-                        <Footer.Link href="#">Licensing</Footer.Link>
-                        <Footer.Link href="#">Contact</Footer.Link>
+                        <div>
+                        <Link to="/about" className="mx-2">About</Link>
+                        <Link to="/calender" className="mx-2">Calendar</Link>
+                        </div>
                     </Footer.LinkGroup>
                 </div>
                 <Footer.Divider />

@@ -6,6 +6,7 @@ import Todo from "./Pages/Todo/Todo";
 import TNavbar from "./Shared/TNavbar";
 import "react-day-picker/dist/style.css";
 import TFooter from "./Shared/TFooter";
+import 'antd/dist/antd.min.css'
 
 function App() {
     return (

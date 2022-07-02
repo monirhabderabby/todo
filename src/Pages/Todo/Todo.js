@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import TodoCard from "../../Shared/TodoCard";
 import { Accordion } from "flowbite-react";
 import { format } from "date-fns";
+import Loader from "../../Shared/Loader";
 
 const Todo = () => {
     const [isPickDate, setIsPickDate] = useState(false);
@@ -22,7 +23,7 @@ const Todo = () => {
 
     const { data:completedTodos, isLoading: isLoading1, refetch:refetch1} = useQuery("completed", ()=> fetch("https://tranquil-fjord-47629.herokuapp.com/completed").then(res=> res.json()))
     if (isLoading || isLoading1) {
-        return <p>loading...</p>;
+        return <Loader />
     }
 
     
@@ -100,7 +101,7 @@ const Todo = () => {
                             <Accordion.Title>Completed {completedTodos?.length}</Accordion.Title>
                             <Accordion.Content>
                                 {completedTodos?.map((t) => (
-                                    <TodoCard  todo={t} isCompleted={true} key={t._id} />
+                                    <TodoCard  todo={t} isCompleted={true} key={t._id} isLoading={isLoading || isLoading1} />
                                 ))}
                             </Accordion.Content>
                         </Accordion.Panel>
